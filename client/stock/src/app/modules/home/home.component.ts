@@ -39,11 +39,11 @@ export class HomeComponent {
           if (response) {
             this.cookieService.set('USER_INFO', response?.token);
             this.loginForm.reset();
-
+            console.log(response)
             this.messageService.add({
               severity: 'success',
               summary: 'Sucesso',
-              detail: `Bem vindo ${response.nome}`,
+              detail: `Bem vindo ${response.name}`,
               life: 2000,
             })
           }

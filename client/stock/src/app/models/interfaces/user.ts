@@ -1,12 +1,12 @@
 export interface User {
 }
 export interface SignupUserRequest{
-    nome: string;
+    name: string;
     email: string;
     password: string;
 }
 export interface SignupUserResponse{
     id: string,
-    nome: string;
+    name: string;
     email: string;
 }
