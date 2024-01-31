@@ -1,0 +1,9 @@
+.grid{
+    background: center / cover no-repeat url("../../../assets/sean-pollock-PhYq704ffdA-unsplash.jpg");
+    height: 100vh;
+}
+@media screen and (min-width: 1400px) {
+    .grid{
+        background-position: top;
+    }
+}
