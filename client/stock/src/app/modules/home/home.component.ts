@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { AuthRequest } from 'src/app/models/interfaces/auth/auth-request';
@@ -29,28 +30,30 @@ export class HomeComponent {
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private cookieService: CookieService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
   ) {}
 
-  onSubmitLoginForm() {
+  onSubmitLoginForm():void {
     if (this.loginForm.value && this.loginForm.valid) {
       this.userService.authUser(this.loginForm.value as AuthRequest).subscribe({
         next: (response) => {
           if (response) {
             this.cookieService.set('USER_INFO', response?.token);
             this.loginForm.reset();
+            this.router.navigate(['/dashboard'])
             console.log(response)
             this.messageService.add({
               severity: 'success',
               summary: 'Sucesso',
-              detail: `Bem vindo ${response.name}`,
-              life: 2000,
+              detail: `Bem vindo ${response?.name}`,
+              life: 4000,
             })
           }
         },
         error: (err) => {
           this.messageService.add({
-            severity: 'success',
+            severity: 'error',
             summary: 'Erro',
             detail: `Ocorreu um erro ao efectuar o login!`,
             life: 2000,
