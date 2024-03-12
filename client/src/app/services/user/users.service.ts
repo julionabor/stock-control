@@ -4,10 +4,10 @@ import { enviroment } from 'src/environments/environment';
 import {
   SignupUserRequest,
   SignupUserResponse,
-} from '../models/interfaces/user';
+} from '../../models/interfaces/user/auth/user';
 import { Observable } from 'rxjs';
-import { AuthRequest } from '../models/interfaces/auth/auth-request';
-import { AuthResponse } from '../models/interfaces/auth/auth-response';
+import { AuthRequest } from '../../models/interfaces/user/auth/auth-request';
+import { AuthResponse } from '../../models/interfaces/user/auth/auth-response';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
