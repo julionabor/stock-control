@@ -1,3 +1,18 @@
-<app-toolbar-navigation>
-    
-</app-toolbar-navigation>
+<app-toolbar-navigation> </app-toolbar-navigation>
+<div class="grid">
+    <div class="col-12">
+        <!-- Gráfico de Produtos em stock -->
+        <p-card
+        header="Quantidade de produtos em stock"
+        styleClass="shadow-3 m-5 text-indigo-800"
+        >
+        <p-chart
+        type="bar"
+        [data]="productsChartData"
+        [options]="productsChartOptions"
+        >
+
+        </p-chart>
+        </p-card>
+    </div>
+</div>
