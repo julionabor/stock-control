@@ -1,14 +1,15 @@
-.grid{
-    background: center / cover no-repeat url("../../../assets/sean-pollock-PhYq704ffdA-unsplash.jpg");
-    height: 100vmin;
+.grid {
+  background: top left / contain no-repeat
+    url("../../../assets/vecteezy_chart-graphics-diagram-data-visualization_7024700.jpg");
+  height: 100vmin;
 }
 @media screen and (min-width: 1000px) {
-    .grid{
-        height: 100vmax;
-    }
+  .grid {
+    height: 100vmax;
+  }
 }
 @media screen and (min-width: 1400px) {
-    .grid{
-        background-position: top;
-    }
+  .grid {
+    // background-position: left;
+  }
 }
