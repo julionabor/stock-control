@@ -8,6 +8,7 @@ import { GetCategoriesResponse } from 'src/app/models/interfaces/categories/resp
 import { EventAction } from 'src/app/models/interfaces/products/event/EventAction';
 import { CreateProductRequest } from 'src/app/models/interfaces/products/request/CreateProductRequest';
 import { EditProductRequest } from 'src/app/models/interfaces/products/request/EditProductRequest';
+import { SaleProductRequests } from 'src/app/models/interfaces/products/request/SaleProductRequests';
 import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
 import { ProductEvent } from 'src/app/modules/enums/products/ProductEvent';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
@@ -164,15 +165,50 @@ export class ProductsFormComponent implements OnInit, OnDestroy {
           },
           error: (err) => {
             console.error(err);
+            this.editProductForm.reset();
             this.messageService.add({
               severity: 'error',
               summary: 'Erro',
               detail: 'Ocorreu um erro ao editar produto!',
               life: 2500,
             });
-            this.editProductForm.reset();
           },
         });
+    }
+  }
+  handleSubmitSaleProduct(): void {
+    if (this.saleProductForm?.value && this.saleProductForm?.valid) {
+      const requestDatas: SaleProductRequests = {
+        amount: this.saleProductForm.value?.amount as number,
+        product_id: this.saleProductForm.value?.product_id as string,
+      };
+      this.productsService.saleProduct(requestDatas)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if(response){
+            this.saleProductForm.reset();
+            this.getProductDatas();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Venda efectuada com sucesso',
+              life: 3000,
+            });
+            this.router.navigate(['/dashboard'])
+          }
+        },
+        error: (err)=> {
+          console.error(err);
+          this.editProductForm.reset();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Ocorreu um erro ao efectuar a venda!',
+              life: 3000,
+            });
+        }
+      })
     }
   }
   getProductSelectedDatas(productId: string): void {
